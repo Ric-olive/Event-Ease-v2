@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Event_Ease</RootNamespace>
+    <UserSecretsId>eb789d8a-68c6-4506-87a1-79bcc79ff849</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
