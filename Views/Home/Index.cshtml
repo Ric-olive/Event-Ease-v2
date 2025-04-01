@@ -1,137 +1,203 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Event Ease - Find Your Perfect Venue";
 }
 
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+5hb5g8lKc5fOX9Y5EzeqqpREsZZH2ojZrG57Qm" crossorigin="anonymous">
-</head>
-
-
-<div class="container-fluid p-0">
-    <div id="customCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+<div class="home-container">
+    <!-- Hero Carousel Section -->
+    <div id="homeCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel">
         <!-- Carousel Indicators -->
         <div class="carousel-indicators">
-            <button type="button" data-bs-target="#customCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#customCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#customCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
 
         <!-- Carousel Content -->
         <div class="carousel-inner">
-            <div class="carousel-item active" style="background-image: url('https://picsum.photos/1920/800'); background-size: cover; background-position: center;">
+            <div class="carousel-item active" style="background-image: url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080');">
                 <div class="carousel-caption">
-                    <h2><a href="#">Find the perfect venue for every occasion—seamless, stylish, and stress-free!</a></h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <h2>Find the perfect venue for every occasion</h2>
+                    <p>Discover stunning venues that match your vision and make your events unforgettable.</p>
+                    <a href="/Venues" class="btn carousel-cta-btn">Explore Venues</a>
                 </div>
             </div>
-            <div class="carousel-item" style="background-image: url('https://picsum.photos/1920/801'); background-size: cover; background-position: center;">
+            <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080');">
                 <div class="carousel-caption">
-                    <h2><a href="#">17 Stunning Venues to Transform Your Dream Event into Reality.</a></h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <h2>Host memorable events that leave lasting impressions</h2>
+                    <p>From weddings to conferences, we have the perfect space for your next gathering.</p>
+                    <a href="/Events" class="btn carousel-cta-btn">View Events</a>
                 </div>
             </div>
-            <div class="carousel-item" style="background-image: url('https://picsum.photos/1920/802'); background-size: cover; background-position: center;">
+            <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1505236858219-8359eb29e329?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080');">
                 <div class="carousel-caption">
-                    <h2><a href="#">13 Unforgettable Venues to Make Your Celebrations Truly Magical </a></h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <h2>Book with ease and plan with confidence</h2>
+                    <p>Our streamlined booking process makes venue reservation simple and stress-free.</p>
+                    <a href="/Bookings" class="btn carousel-cta-btn">Make a Booking</a>
                 </div>
             </div>
         </div>
 
         <!-- Carousel Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#customCarousel" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#customCarousel" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-</div>
 
-<div class="container section did-you-know">
-    <h3 class="text-center">Did You Know?</h3>
-    <div class="row text-center">
-        <div class="col-md-4">
-            <div class="fact-box">
-                <i class="bi bi-lightbulb-fill fact-icon"></i>
-                <h5 class="mt-3">Largest Event Venue</h5>
-                <p>The Hannover Fairground is the world’s largest event venue, covering 496,000 square meters!</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="fact-box">
-                <i class="bi bi-people-fill fact-icon"></i>
-                <h5 class="mt-3">Biggest Concert Crowd</h5>
-                <p>In 1997, 3.5 million people attended Rod Stewart’s concert at Copacabana Beach!</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="fact-box">
-                <i class="bi bi-geo-alt-fill fact-icon"></i>
-                <h5 class="mt-3">Unique Venue</h5>
-                <p>You can host events at an underwater restaurant in the Maldives—it's breathtaking!</p>
-            </div>
-        </div>
-    </div>
-
-<div class="container section">
-    <h3 class="text-center">Explore Stunning Venues</h3>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card">
-                <img src="https://picsum.photos/400/300?random=1" class="card-img-top" alt="Venue Image">
-                <div class="card-body">
-                    <h5 class="card-title">Luxury Hall</h5>
-                    <p class="card-text">Perfect for weddings and galas.</p>
-                        <button class="btn btn-primary">View More</button>
+    <!-- Facts Section -->
+    <section class="facts-section home-section">
+        <div class="container">
+            <h2 class="section-title">Did You Know?</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="fact-box text-center">
+                        <i class="bi bi-lightbulb-fill fact-icon"></i>
+                        <h5 class="fact-title">Largest Event Venue</h5>
+                        <p class="fact-text">The Hannover Fairground is the world's largest event venue, covering 496,000 square meters!</p>
                     </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <img src="https://picsum.photos/400/300?random=2" class="card-img-top" alt="Venue Image">
-                <div class="card-body">
-                    <h5 class="card-title">Scenic Garden</h5>
-                    <p class="card-text">Ideal for outdoor parties and ceremonies.</p>
-                        <button class="btn btn-primary">View More</button>
+                </div>
+                <div class="col-md-4">
+                    <div class="fact-box text-center">
+                        <i class="bi bi-people-fill fact-icon"></i>
+                        <h5 class="fact-title">Biggest Concert Crowd</h5>
+                        <p class="fact-text">In 1997, 3.5 million people attended Rod Stewart's concert at Copacabana Beach!</p>
                     </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <img src="https://picsum.photos/400/300?random=3" class="card-img-top" alt="Venue Image">
-                <div class="card-body">
-                    <h5 class="card-title">Tech Hub</h5>
-                    <p class="card-text">Modern space for conferences and tech events.</p>
-                    <button  class="btn btn-primary">View More</button>
+                </div>
+                <div class="col-md-4">
+                    <div class="fact-box text-center">
+                        <i class="bi bi-geo-alt-fill fact-icon"></i>
+                        <h5 class="fact-title">Unique Venue</h5>
+                        <p class="fact-text">You can host events at an underwater restaurant in the Maldives—it's breathtaking!</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
 
-<div class="container section">
-    <h3 class="text-center">Featured Events & Venues</h3>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <img src="https://picsum.photos/600/400?random=4" class="card-img-top" alt="Event Image">
-                <div class="card-body">
-                    <h5 class="card-title">Rio Carnival</h5>
-                    <p class="card-text">Celebrate the world’s largest carnival with color and joy.</p>
+    <!-- Venues Section -->
+    <section class="venues-section home-section">
+        <div class="container">
+            <h2 class="section-title">Explore Stunning Venues</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="venue-card">
+                        <div style="overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400" class="card-img-top venue-card-img" alt="Luxury Hall">
+                        </div>
+                        <div class="venue-card-body">
+                            <h5 class="venue-card-title">Luxury Hall</h5>
+                            <p class="venue-card-text">Perfect for weddings and galas, this opulent venue features crystal chandeliers and marble floors.</p>
+                        </div>
+                        <div class="venue-card-footer">
+                            <div>
+                                <span class="venue-location"><i class="bi bi-geo-alt me-1"></i>Manhattan</span>
+                                <span class="venue-capacity ms-3"><i class="bi bi-people me-1"></i>500 guests</span>
+                            </div>
+                            <a href="/Venues" class="btn venue-btn">View More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="venue-card">
+                        <div style="overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400" class="card-img-top venue-card-img" alt="Scenic Garden">
+                        </div>
+                        <div class="venue-card-body">
+                            <h5 class="venue-card-title">Scenic Garden</h5>
+                            <p class="venue-card-text">Ideal for outdoor parties and ceremonies, this beautiful garden offers lush landscapes and natural beauty.</p>
+                        </div>
+                        <div class="venue-card-footer">
+                            <div>
+                                <span class="venue-location"><i class="bi bi-geo-alt me-1"></i>Beverly Hills</span>
+                                <span class="venue-capacity ms-3"><i class="bi bi-people me-1"></i>300 guests</span>
+                            </div>
+                            <a href="/Venues" class="btn venue-btn">View More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="venue-card">
+                        <div style="overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400" class="card-img-top venue-card-img" alt="Tech Hub">
+                        </div>
+                        <div class="venue-card-body">
+                            <h5 class="venue-card-title">Tech Hub</h5>
+                            <p class="venue-card-text">Modern space for conferences and tech events with state-of-the-art AV equipment and flexible layouts.</p>
+                        </div>
+                        <div class="venue-card-footer">
+                            <div>
+                                <span class="venue-location"><i class="bi bi-geo-alt me-1"></i>San Francisco</span>
+                                <span class="venue-capacity ms-3"><i class="bi bi-people me-1"></i>400 guests</span>
+                            </div>
+                            <a href="/Venues" class="btn venue-btn">View More</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card">
-                <img src="https://picsum.photos/600/400?random=5" class="card-img-top" alt="Venue Image">
-                <div class="card-body">
-                    <h5 class="card-title">Sydney Opera House</h5>
-                    <p class="card-text">An iconic venue hosting over 1,500 performances annually.</p>
+    </section>
+
+    <!-- Featured Section -->
+    <section class="featured-section home-section">
+        <div class="container">
+            <h2 class="section-title">Featured Events & Venues</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="featured-card">
+                        <div style="overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400" class="card-img-top featured-img" alt="Rio Carnival">
+                        </div>
+                        <div class="featured-body">
+                            <h4 class="featured-title">Rio Carnival</h4>
+                            <p class="featured-text">Celebrate the world's largest carnival with color, music, dance, and joy. A truly unforgettable experience.</p>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-calendar-event me-2"></i>
+                                <span>Feb 17-25, 2024</span>
+                                <i class="bi bi-geo-alt ms-4 me-2"></i>
+                                <span>Rio de Janeiro, Brazil</span>
+                            </div>
+                        </div>
+                        <div class="featured-footer text-end">
+                            <a href="/Events" class="btn featured-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="featured-card">
+                        <div style="overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1624138784614-87fd1b6528f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400" class="card-img-top featured-img" alt="Sydney Opera House">
+                        </div>
+                        <div class="featured-body">
+                            <h4 class="featured-title">Sydney Opera House</h4>
+                            <p class="featured-text">An iconic venue hosting over 1,500 performances annually. Book this architectural masterpiece for your special event.</p>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-building me-2"></i>
+                                <span>Bennelong Point, Sydney</span>
+                                <i class="bi bi-people ms-4 me-2"></i>
+                                <span>2,679 capacity</span>
+                            </div>
+                        </div>
+                        <div class="featured-footer text-end">
+                            <a href="/Venues" class="btn featured-btn">Learn More</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section" style="background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080');">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Plan Your Next Event?</h2>
+                <p class="cta-text">From intimate gatherings to large conferences, we have venues for every occasion. Start your journey with Event Ease today.</p>
+                <a href="/Bookings/Add" class="btn cta-btn">Make a Booking Now</a>
+            </div>
+        </div>
+    </section>
 </div>

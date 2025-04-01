@@ -1,89 +1,1719 @@
-html {
-  font-size: 14px;
+/* ======= HOME PAGE STYLES ======= */
+.home-container {
+    padding: 0;
+    background-color: #f8f9fa;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+/* Hero Carousel Styling */
+.hero-carousel {
+    position: relative;
+    margin-bottom: 50px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-.carousel {
-    margin-bottom: 30px; /* Adjust this value as needed */
-}
-
-/* Carousel Items */
 .carousel-item {
-    height: 400px; /* Reduced height for a rectangular shape */
-    width: 100%; /* Full width of the container */
-    margin-top: 30px;
+    height: 600px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
 }
 
-
-
-/* Carousel Captions */
-.carousel-item .carousel-caption {
+.carousel-item::before {
+    content: '';
     position: absolute;
-    bottom: 15%; /* Adjusts position for better spacing */
-    background: rgba(0, 0, 0, 0.7); /* Slightly darker background for contrast */
-    padding: 20px;
-    border-radius: 10px;
-    color: white;
-    max-width: 80%; /* Ensures captions don't overflow */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.7));
+    z-index: 1;
 }
 
-.carousel-item h2 a {
+.carousel-caption {
+    z-index: 2;
+    bottom: 100px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.carousel-caption h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.carousel-caption h2 a {
     color: white;
     text-decoration: none;
-    font-size: 32px; /* Slightly larger for better visibility */
+    transition: all 0.3s;
 }
 
-.carousel-item p {
-    font-size: 18px; /* Increased font size for better readability */
+.carousel-caption h2 a:hover {
+    color: #f8f9fa;
 }
 
-/* Carousel Indicators */
+.carousel-caption p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
 .carousel-indicators {
-    bottom: 20px; /* Adjusted to move closer to the bottom */
+    bottom: 30px;
 }
 
 .carousel-indicators button {
-    background-color: rgba(255, 255, 255, 0.7); /* Subtle white with transparency */
     width: 12px;
     height: 12px;
-    border-radius: 50%; /* Makes indicators circular */
-    border: none;
+    border-radius: 50%;
+    margin: 0 6px;
+    background-color: white;
+    opacity: 0.6;
+    transition: all 0.3s;
 }
 
+.carousel-indicators button.active {
+    opacity: 1;
+    background-color: white;
+    transform: scale(1.2);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+}
+
+.carousel-cta-btn {
+    background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(106, 17, 203, 0.4);
+}
+
+.carousel-cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(106, 17, 203, 0.6);
+    color: white;
+}
+
+/* Section Styling */
+.home-section {
+    padding: 60px 0;
+    position: relative;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    font-weight: 700;
+    color: #343a40;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+}
+
+/* Facts Section Styling */
+.facts-section {
+    background-color: #f8f9fa;
+    padding: 60px 0;
+}
+
+.fact-box {
+    background-color: white;
+    padding: 30px 20px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    transition: all 0.3s;
+    height: 100%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.fact-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.fact-icon {
+    font-size: 3rem;
+    color: #6a11cb;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.fact-title {
+    font-weight: 600;
+    color: #343a40;
+    margin-bottom: 15px;
+}
+
+.fact-text {
+    color: #6c757d;
+    font-size: 1rem;
+}
+
+/* Venues Section Styling */
+.venues-section {
+    padding: 60px 0;
+    background-color: white;
+}
+
+.venue-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+    height: 100%;
+}
+
+.venue-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.venue-card-img {
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.venue-card:hover .venue-card-img {
+    transform: scale(1.05);
+}
+
+.venue-card-body {
+    padding: 20px;
+}
+
+.venue-card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #343a40;
+    margin-bottom: 10px;
+}
+
+.venue-card-text {
+    color: #6c757d;
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.venue-card-footer {
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.venue-location {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.venue-capacity {
+    color: #343a40;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.venue-btn {
+    background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 25px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.venue-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 15px rgba(106, 17, 203, 0.3);
+    color: white;
+}
+
+/* Featured Section Styling */
+.featured-section {
+    background-color: #f8f9fa;
+    padding: 60px 0;
+}
+
+.featured-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+    height: 100%;
+}
+
+.featured-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.featured-img {
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.featured-card:hover .featured-img {
+    transform: scale(1.05);
+}
+
+.featured-body {
+    padding: 25px;
+}
+
+.featured-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #343a40;
+    margin-bottom: 10px;
+}
+
+.featured-text {
+    color: #6c757d;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.featured-footer {
+    padding: 15px 25px;
+    background-color: white;
+    border-top: 1px solid #e9ecef;
+}
+
+.featured-btn {
+    background-image: linear-gradient(to right, #fd7e14, #e96b08);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 25px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.featured-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 15px rgba(253, 126, 20, 0.3);
+    color: white;
+}
+
+/* CTA Section Styling */
+.cta-section {
+    background-image: url('https://source.unsplash.com/random/1920x1080/?event');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    position: relative;
+    margin-bottom: 60px;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(106, 17, 203, 0.8), rgba(37, 117, 252, 0.8));
+    z-index: 1;
+}
+
+.cta-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cta-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.cta-text {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.cta-btn {
+    background-color: white;
+    color: #6a11cb;
+    border: none;
+    border-radius: 50px;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+.cta-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.4);
+    color: #6a11cb;
+}
 
 /* Responsive Adjustments */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .carousel-item {
-        height: 400px; /* Reduces size for smaller screens */
+        height: 500px;
     }
 
-        .carousel-item .carousel-caption {
-            bottom: 10%;
-            padding: 15px;
-            font-size: 14px;
-        }
+    .carousel-caption {
+        bottom: 50px;
+        padding: 20px;
+    }
 
-        .carousel-item h2 a {
-            font-size: 24px;
-        }
-
-        .carousel-item p {
-            font-size: 14px;
-        }
+    .carousel-caption h2 {
+        font-size: 2rem;
+    }
 }
 
-.did-you-know a {
-    color: inherit; /* Makes the link inherit surrounding color */
-    text-decoration: none; /* Removes underline */
-    pointer-events: none; /* Disables link functionality */
-    cursor: default; /* Changes the cursor to default */
+@media (max-width: 768px) {
+    .carousel-item {
+        height: 400px;
+    }
+
+    .carousel-caption {
+        bottom: 30px;
+        padding: 15px;
+    }
+
+    .carousel-caption h2 {
+        font-size: 1.5rem;
+    }
+
+    .carousel-caption p {
+        font-size: 1rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .cta-title {
+        font-size: 2rem;
+    }
+
+    .cta-text {
+        font-size: 1rem;
+    }
+}
+
+/* ======= GENERAL STYLES ======= */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+.btn {
+    border-radius: 50px;
+    padding: 8px 20px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* ======= COMMON FORM STYLES ======= */
+.form-container {
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 40px;
+    margin: 30px auto;
+    max-width: 1200px;
+}
+
+.page-title {
+    font-weight: 600;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #6c757d;
+    padding-bottom: 15px;
+    position: relative;
+}
+
+.page-title:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 80px;
+    height: 2px;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #495057;
+}
+
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    padding: 12px;
+    transition: all 0.3s;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-check-input {
+    width: 20px;
+    height: 20px;
+}
+
+.form-check-label {
+    padding-left: 10px;
+    font-weight: 500;
+}
+
+.text-danger {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* ======= ADD VENUE STYLES ======= */
+.venue-form-container {
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 40px;
+    margin: 30px auto;
+    max-width: 1200px;
+}
+
+.venue-title {
+    color: #343a40;
+    font-weight: 600;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #6c757d;
+    padding-bottom: 15px;
+    position: relative;
+}
+
+.venue-title:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 80px;
+    height: 2px;
+    background: #007bff;
+}
+
+.btn-submit {
+    background: linear-gradient(to right, #007bff, #0056b3);
+    border: none;
+    border-radius: 50px;
+    padding: 12px 30px;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.btn-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(0, 123, 255, 0.4);
+}
+
+/* ======= EDIT VENUE STYLES ======= */
+.edit-venue-container {
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 40px;
+    margin: 30px auto;
+    max-width: 1200px;
+}
+
+.edit-title {
+    color: #343a40;
+    font-weight: 600;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #6c757d;
+    padding-bottom: 15px;
+    position: relative;
+}
+
+.edit-title:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 80px;
+    height: 2px;
+    background: #28a745;
+}
+
+.btn-edit {
+    background: linear-gradient(to right, #28a745, #218838);
+    border: none;
+    border-radius: 50px;
+    padding: 12px 30px;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.btn-edit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(40, 167, 69, 0.4);
+}
+
+.not-found {
+    text-align: center;
+    padding: 40px;
+    background-color: #f8d7da;
+    border-radius: 15px;
+    margin: 30px auto;
+    max-width: 600px;
+    color: #721c24;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* ======= IMAGE PREVIEW STYLES ======= */
+.image-preview-container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-preview-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #343a40;
+    margin-bottom: 15px;
+}
+
+.image-preview {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.image-preview:hover {
+    transform: scale(1.03);
+}
+
+/* ======= VENUE LIST STYLES ======= */
+.venues-container {
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.venues-header {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    border-radius: 15px;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.venues-header h1 {
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.venues-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.filter-container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.venue-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s;
+    height: 100%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.venue-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.venue-img {
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.venue-card:hover .venue-img {
+    transform: scale(1.05);
+}
+
+.venue-card .card-body {
+    padding: 20px;
+}
+
+.venue-card .card-title {
+    font-weight: 700;
+    color: #343a40;
+    font-size: 1.4rem;
+}
+
+.venue-card .card-text {
+    color: #6c757d;
+    font-size: 0.95rem;
+}
+
+.venue-card .card-footer {
+    background-color: white;
+    border-top: 1px solid #f1f1f1;
+    padding: 15px 20px;
+}
+
+.btn-edit-card {
+    background-color: #17a2b8;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 50px;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-edit-card:hover {
+    background-color: #138496;
+    transform: translateY(-3px);
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 50px;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+    transform: translateY(-3px);
+}
+
+.add-venue-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #28a745;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+    transition: all 0.3s;
+    z-index: 1000;
+}
+
+.add-venue-btn:hover {
+    transform: scale(1.1);
+    background-color: #218838;
+}
+
+.venue-info {
+    margin-bottom: 10px;
+}
+
+.venue-info-label {
+    font-weight: 600;
+    color: #495057;
+}
+
+.venue-status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.venue-active {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.venue-inactive {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.alert {
+    border-radius: 10px;
+    padding: 15px 20px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: white;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+.empty-state h3 {
+    margin-top: 20px;
+    color: #343a40;
+}
+
+.empty-state p {
+    color: #6c757d;
+    max-width: 400px;
+    margin: 15px auto;
+}
+
+/* ======= RESPONSIVE ADJUSTMENTS ======= */
+@media (max-width: 768px) {
+    .venue-form-container, .edit-venue-container {
+        padding: 20px;
+    }
+
+    .venues-header {
+        padding: 30px 20px;
+    }
+
+    .venues-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .venues-header p {
+        font-size: 1rem;
+    }
+
+    .btn-submit, .btn-edit {
+        width: 100%;
+    }
+
+    .add-venue-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* ======= EVENT LIST STYLES ======= */
+.events-container {
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.events-header {
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    border-radius: 15px;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.events-header h1 {
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.events-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.events-table-container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 5px;
     margin-top: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.events-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.events-table th {
+    background: #343a40;
+    color: white;
+    font-weight: 600;
+    padding: 15px;
+    text-align: center;
+    border: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.events-table th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.events-table th:last-child {
+    border-top-right-radius: 10px;
+}
+
+.events-table td {
+    padding: 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid #e9ecef;
+    color: #495057;
+}
+
+.events-table tr:last-child td {
+    border-bottom: none;
+}
+
+.events-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+.event-name {
+    font-weight: 600;
+    color: #343a40;
+}
+
+.event-date {
+    font-weight: 500;
+    color: #6c757d;
+}
+
+.event-venue {
+    font-weight: 500;
+    color: #007bff;
+}
+
+.event-description {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.event-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-event-edit {
+    background-color: #17a2b8;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-event-edit:hover {
+    background-color: #138496;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(23, 162, 184, 0.3);
+}
+
+.btn-event-delete {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-event-delete:hover {
+    background-color: #c82333;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+}
+
+.add-event-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #fd7e14;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 15px rgba(253, 126, 20, 0.4);
+    transition: all 0.3s;
+    z-index: 1000;
+}
+
+.add-event-btn:hover {
+    transform: scale(1.1);
+    background-color: #e96b08;
+}
+
+/* ======= EVENT FORM STYLES ======= */
+.event-form-container {
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 40px;
+    margin: 30px auto;
+    max-width: 1200px;
+}
+
+.event-title {
+    color: #343a40;
+    font-weight: 600;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #6c757d;
+    padding-bottom: 15px;
+    position: relative;
+}
+
+.event-title:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 80px;
+    height: 2px;
+    background: #fd7e14;
+}
+
+.btn-event-submit {
+    background: linear-gradient(to right, #fd7e14, #e96b08);
+    border: none;
+    border-radius: 50px;
+    padding: 12px 30px;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(253, 126, 20, 0.3);
+}
+
+.btn-event-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(253, 126, 20, 0.4);
+}
+
+.event-image-container {
+    height: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.event-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.event-image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
+    padding: 30px 20px;
+    color: white;
+}
+
+.event-image-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.event-image-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.edit-event-container {
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 40px;
+    margin: 30px auto;
+    max-width: 1200px;
+}
+
+.edit-event-title {
+    color: #343a40;
+    font-weight: 600;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #6c757d;
+    padding-bottom: 15px;
+    position: relative;
+}
+
+.edit-event-title:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 80px;
+    height: 2px;
+    background: #20c997;
+}
+
+.btn-edit-event {
+    background: linear-gradient(to right, #20c997, #0ca678);
+    border: none;
+    border-radius: 50px;
+    padding: 12px 30px;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(32, 201, 151, 0.3);
+}
+
+.btn-edit-event:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(32, 201, 151, 0.4);
+}
+
+/* ======= BOOKING LIST STYLES ======= */
+.bookings-container {
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.bookings-header {
+    background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+    border-radius: 15px;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.bookings-header h1 {
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.bookings-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.bookings-table-container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 5px;
+    margin-top: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.bookings-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.bookings-table th {
+    background: #343a40;
+    color: white;
+    font-weight: 600;
+    padding: 15px;
+    text-align: center;
+    border: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.bookings-table th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.bookings-table th:last-child {
+    border-top-right-radius: 10px;
+}
+
+.bookings-table td {
+    padding: 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid #e9ecef;
+    color: #495057;
+}
+
+.bookings-table tr:last-child td {
+    border-bottom: none;
+}
+
+.bookings-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+.booking-event-name {
+    font-weight: 600;
+    color: #343a40;
+}
+
+.booking-date {
+    font-weight: 500;
+    color: #6c757d;
+}
+
+.booking-venue {
+    font-weight: 500;
+    color: #4b6cb7;
+}
+
+.booking-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-booking-edit {
+    background-color: #4b6cb7;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-booking-edit:hover {
+    background-color: #3b5998;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(75, 108, 183, 0.3);
+}
+
+.btn-booking-delete {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-booking-delete:hover {
+    background-color: #c82333;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+}
+
+.add-booking-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #4b6cb7;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 15px rgba(75, 108, 183, 0.4);
+    transition: all 0.3s;
+    z-index: 1000;
+}
+
+.add-booking-btn:hover {
+    transform: scale(1.1);
+    background-color: #3b5998;
+}
+
+/* ======= BOOKING FORM STYLES ======= */
+.booking-form-container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.booking-form-header {
+    background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.booking-form-header h2 {
+    font-weight: 600;
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.booking-form-body {
+    padding: 30px;
+}
+
+.booking-form-footer {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #e9ecef;
+}
+
+.btn-booking-submit {
+    background: linear-gradient(to right, #4b6cb7, #182848);
+    border: none;
+    border-radius: 50px;
+    padding: 12px 30px;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(75, 108, 183, 0.3);
+    min-width: 200px;
+}
+
+.btn-booking-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(75, 108, 183, 0.4);
+}
+
+.booking-form-icon {
+    font-size: 5rem;
+    color: #4b6cb7;
+    margin-bottom: 20px;
+}
+
+.form-select-booking {
+    border-radius: 10px;
+    padding: 12px;
+    border: 1px solid #ced4da;
+    font-size: 1rem;
+    color: #495057;
+    background-color: white;
+    transition: all 0.3s;
+}
+
+.form-select-booking:focus {
+    border-color: #4b6cb7;
+    box-shadow: 0 0 0 0.25rem rgba(75, 108, 183, 0.25);
+}
+
+.booking-date-input {
+    border-radius: 10px;
+    padding: 12px;
+    border: 1px solid #ced4da;
+    font-size: 1rem;
+    color: #495057;
+    background-color: white;
+    transition: all 0.3s;
+}
+
+.booking-date-input:focus {
+    border-color: #4b6cb7;
+    box-shadow: 0 0 0 0.25rem rgba(75, 108, 183, 0.25);
+}
+
+.edit-booking-container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.edit-booking-header {
+    background: linear-gradient(135deg, #6a3093 0%, #a044ff 100%);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.edit-booking-header h2 {
+    font-weight: 600;
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.edit-booking-body {
+    padding: 30px;
+}
+
+.edit-booking-footer {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #e9ecef;
+}
+
+.btn-edit-booking {
+    background: linear-gradient(to right, #6a3093, #a044ff);
+    border: none;
+    border-radius: 50px;
+    padding: 12px 30px;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(106, 48, 147, 0.3);
+    min-width: 200px;
+}
+
+.btn-edit-booking:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(106, 48, 147, 0.4);
+}
+
+.booking-not-found {
+    text-align: center;
+    padding: 40px;
+    background-color: #f8d7da;
+    border-radius: 15px;
+    margin: 30px auto;
+    max-width: 600px;
+    color: #721c24;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.booking-form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+}
+
+/* ======= NAVBAR AND LAYOUT STYLES ======= */
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+.main-navbar {
+    background: linear-gradient(135deg, #343a40 0%, #121416 100%);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    padding: 15px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand:hover {
+    color: #6a11cb;
+    transform: translateY(-2px);
+}
+
+.navbar-brand-icon {
+    margin-right: 10px;
+    font-size: 1.8rem;
+    color: #6a11cb;
+}
+
+.nav-link {
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 20px 15px;
+    color: rgba(255,255,255,0.85);
+    position: relative;
+    transition: all 0.3s;
+}
+
+.nav-link:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    transition: all 0.3s;
+}
+
+.nav-link:hover {
+    color: white;
+}
+
+.nav-link:hover:before {
+    width: 100%;
+}
+
+.nav-link.active {
+    color: white;
+    font-weight: 600;
+}
+
+.nav-link.active:before {
+    width: 100%;
+}
+
+.dropdown-menu {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    padding: 10px;
+    background: #343a40;
+    margin-top: 10px;
+    transition: all 0.3s;
+}
+
+.dropdown-item {
+    color: rgba(255,255,255,0.85);
+    font-size: 0.95rem;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    transition: all 0.2s;
+}
+
+.dropdown-item:hover {
+    background: rgba(106, 17, 203, 0.2);
+    color: white;
+    transform: translateX(5px);
+}
+
+.dropdown-item i {
+    margin-right: 8px;
+}
+
+.nav-item-divider {
+    height: 24px;
+    width: 1px;
+    background-color: rgba(255,255,255,0.2);
+    margin: auto 10px;
+}
+
+.navbar-toggler {
+    border: none;
+    margin-right: 15px;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+@media (max-width: 991px) {
+    .nav-link:before {
+        display: none;
+    }
+
+    .nav-item-divider {
+        display: none;
+    }
+}
+
+/* ======= FOOTER STYLES ======= */
+.footer {
+    background: linear-gradient(135deg, #343a40 0%, #121416 100%);
+    color: rgba(255,255,255,0.8);
+    padding: 40px 0 20px;
+    margin-top: 40px;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+}
+
+.footer-brand {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.footer-links-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-links-title:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: rgba(255,255,255,0.7);
+    transition: all 0.3s;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.footer-links a:hover {
+    color: white;
+    transform: translateX(5px);
+}
+
+.footer-links i {
+    margin-right: 10px;
+    font-size: 0.8rem;
+}
+
+.footer-social a {
+    color: rgba(255,255,255,0.7);
+    font-size: 1.3rem;
+    margin-right: 15px;
+    transition: all 0.3s;
+    display: inline-block;
+}
+
+.footer-social a:hover {
+    color: white;
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    background: rgba(0,0,0,0.2);
+    padding: 15px 0;
+    margin-top: 30px;
+    text-align: center;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+}
+
+.footer-bottom a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.footer-bottom a:hover {
+    color: white;
+}
+
+.container-wide {
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
 }

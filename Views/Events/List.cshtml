@@ -1,90 +1,233 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model List<Event_Ease.Models.Entities.Event>
 
-@model List< Event_Ease.Models.Entities.Event>
+<div class="events-container">
+    <!-- Alert Messages -->
+    @if (TempData["ErrorMessage"] != null) {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    
+    @if (TempData["SuccessMessage"] != null) {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
 
-@if (TempData["ErrorMessage"] != null)
-{
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        @TempData["ErrorMessage"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <!-- Header Section -->
+    <div class="events-header">
+        <div class="container">
+            <h1>Upcoming Events Calendar</h1>
+            <p>Discover and manage all your scheduled events in one place</p>
+            <a href="/Events/Add" class="btn btn-light mt-3">
+                <i class="bi bi-plus-circle me-2"></i>Create New Event
+            </a>
+        </div>
     </div>
-}
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        @TempData["SuccessMessage"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-}
 
-<!-- Add Jumbotron Section -->
-<div class="jumbotron jumbotron-fluid text-center bg-light p-4 mb-4">
+    <!-- Filter Section -->
+    <div class="container mb-4">
+        <div class="filter-container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white">
+                            <i class="bi bi-search"></i>
+                        </span>
+                        <input type="text" id="eventSearchInput" class="form-control" placeholder="Search by event name">
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white">
+                            <i class="bi bi-geo-alt"></i>
+                        </span>
+                        <select id="venueFilter" class="form-control">
+                            <option value="" selected>All Venues</option>
+                            @{
+                                var venues = Model
+                                    .Where(e => e.Venue != null)
+                                    .Select(e => e.Venue.VenueName)
+                                    .Distinct()
+                                    .ToList();
+                                
+                                foreach (var venue in venues)
+                                {
+                                    <option value="@venue">@venue</option>
+                                }
+                            }
+                            <option value="no-venue">No Venue Selected</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white">
+                            <i class="bi bi-calendar-date"></i>
+                        </span>
+                        <select id="dateFilter" class="form-control">
+                            <option value="" selected>All Dates</option>
+                            <option value="upcoming">Upcoming Events</option>
+                            <option value="past">Past Events</option>
+                            <option value="today">Today's Events</option>
+                            <option value="this-week">This Week</option>
+                            <option value="this-month">This Month</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Events Table Section -->
     <div class="container">
-        <h1 class="display-4">All Events</h1>
-        <p class="lead">Explore the perfect events tailored to your needs</p>
+        <div class="events-table-container">
+            <table class="events-table" id="eventsTable">
+                <thead>
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Venue</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        foreach (var userEvent in Model)
+                        {
+                            <tr class="event-item" 
+                                data-name="@userEvent.EventName.ToLower()" 
+                                data-venue="@(userEvent.Venue != null ? userEvent.Venue.VenueName : "no-venue")"
+                                data-start-date="@userEvent.EventStartDate.ToString("yyyy-MM-dd")"
+                                data-end-date="@userEvent.EventEndDate.ToString("yyyy-MM-dd")">
+                                <td class="event-name">@userEvent.EventName</td>
+                                <td class="event-date">
+                                    <i class="bi bi-calendar2-check me-2"></i>
+                                    @userEvent.EventStartDate.ToString("MMM dd, yyyy")
+                                </td>
+                                <td class="event-date">
+                                    <i class="bi bi-calendar2-x me-2"></i>
+                                    @userEvent.EventEndDate.ToString("MMM dd, yyyy")
+                                </td>
+                                <td class="event-venue">
+                                    @if (userEvent.Venue != null)
+                                    {
+                                        <i class="bi bi-geo-alt me-2"></i>
+                                        @userEvent.Venue.VenueName
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">
+                                            <i class="bi bi-x-circle me-2"></i>
+                                            No Venue Selected
+                                        </span>
+                                    }
+                                </td>
+                                <td class="event-description">
+                                    <span title="@userEvent.Description">
+                                        @(userEvent.Description?.Length > 30 
+                                            ? userEvent.Description.Substring(0, 30) + "..." 
+                                            : userEvent.Description)
+                                    </span>
+                                </td>
+                                <td class="event-actions">
+                                    <a asp-controller="Events" asp-action="Edit" asp-route-id="@userEvent.EventID" class="btn-event-edit">
+                                        <i class="bi bi-pencil me-1"></i> Edit
+                                    </a>
+                                    <form asp-controller="Events" asp-action="Delete" asp-route-id="@userEvent.EventID" method="post" onsubmit="return confirm('Are you sure you want to delete this event?');">
+                                        <button type="submit" class="btn-event-delete">
+                                            <i class="bi bi-trash me-1"></i> Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center py-5">
+                                <i class="bi bi-calendar-x" style="font-size: 3rem; color: #6c757d;"></i>
+                                <h4 class="mt-3">No Events Found</h4>
+                                <p class="text-muted">Create your first event to get started</p>
+                                <a href="/Events/Add" class="btn btn-primary mt-2">
+                                    <i class="bi bi-plus-circle me-2"></i>Add First Event
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
+
+    <!-- Floating Add Button -->
+    <a href="/Events/Add" class="add-event-btn" title="Add New Event">
+        <i class="bi bi-plus-lg"></i>
+    </a>
 </div>
 
-<!-- Filter Section -->
-<div class="container mb-4">
-    <div class="row">
-        <div class="col-md-4">
-            <input type="text" class="form-control" placeholder="Search by name">
-        </div>
-        <div class="col-md-4">
-            <select class="form-control">
-                <option selected disabled>Filter by location</option>
-                <option>New York</option>
-                <option>Los Angeles</option>
-                <option>Chicago</option>
-                <option>Miami</option>
-            </select>
-        </div>
-        <div class="col-md-4">
-            <select class="form-control">
-                <option selected disabled>Filter by capacity</option>
-                <option>1-100</option>
-                <option>101-500</option>
-                <option>501-1000</option>
-                <option>1001+</option>
-            </select>
-        </div>
-    </div>
-</div>
-
-<div class="table-responsive shadow rounded">
-    <table class="table table-hover table-bordered align-middle text-center">
-        <thead class="table-dark">
-            <tr>
-                <th scope="col">Event Name</th>
-                <th scope="col">Event Start Date</th>
-                <th scope="col">Event End Date</th>
-                <th scope="col">Venue</th>
-                <th scope="col">Description</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var UserEvent in Model)
-            {
-                <tr>
-                    <td>@UserEvent.EventName</td>
-                    <td>@UserEvent.EventStartDate.ToString("yyyy-MM-dd")</td>
-                    <td>@UserEvent.EventEndDate.ToString("yyyy-MM-dd")</td>
-                    <td>@(UserEvent.Venue != null ? UserEvent.Venue.VenueName : "No Venue Selected")</td>
-                    <td>@UserEvent.Description</td>
-                    <td>
-                        <a asp-controller="Events" asp-action="Edit" asp-route-id="@UserEvent.EventID" class="btn btn-sm btn-outline-primary me-1">Edit</a>
-                        <form asp-controller="Events" asp-action="Delete" asp-route-id="@UserEvent.EventID" method="post" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('eventSearchInput');
+        const venueFilter = document.getElementById('venueFilter');
+        const dateFilter = document.getElementById('dateFilter');
+        const eventItems = document.querySelectorAll('.event-item');
+        
+        function filterEvents() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const venueValue = venueFilter.value;
+            const dateValue = dateFilter.value;
+            const today = new Date().toISOString().split('T')[0];
+            
+            eventItems.forEach(item => {
+                const name = item.dataset.name;
+                const venue = item.dataset.venue;
+                const startDate = item.dataset.startDate;
+                const endDate = item.dataset.endDate;
+                
+                let showBySearch = name.includes(searchTerm);
+                let showByVenue = venueValue === '' || venue === venueValue;
+                let showByDate = true;
+                
+                // Date filtering logic
+                if (dateValue === 'upcoming') {
+                    showByDate = startDate >= today;
+                } else if (dateValue === 'past') {
+                    showByDate = endDate < today;
+                } else if (dateValue === 'today') {
+                    showByDate = startDate <= today && endDate >= today;
+                } else if (dateValue === 'this-week') {
+                    const nextWeek = new Date();
+                    nextWeek.setDate(nextWeek.getDate() + 7);
+                    const nextWeekStr = nextWeek.toISOString().split('T')[0];
+                    showByDate = startDate >= today && startDate <= nextWeekStr;
+                } else if (dateValue === 'this-month') {
+                    const nextMonth = new Date();
+                    nextMonth.setMonth(nextMonth.getMonth() + 1);
+                    const nextMonthStr = nextMonth.toISOString().split('T')[0];
+                    showByDate = startDate >= today && startDate <= nextMonthStr;
+                }
+                
+                if (showBySearch && showByVenue && showByDate) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        
+        searchInput.addEventListener('input', filterEvents);
+        venueFilter.addEventListener('change', filterEvents);
+        dateFilter.addEventListener('change', filterEvents);
+    });
+</script>

@@ -1,10 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
-@model Event_Ease.Models.ViewModels.AddEventViewModel
+﻿@model Event_Ease.Models.ViewModels.AddEventViewModel
 
 <head>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
@@ -12,45 +6,98 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation-unobtrusive@3.2.12/dist/jquery.validate.unobtrusive.min.js"></script>
 </head>
 
-
-<div style="display: flex; font-family: Arial, sans-serif; margin: 20px; gap: 20px; background: #f9f9f9; border-radius: 10px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-    <div style="flex: 2; padding-left: 50px;">
-        <h2 style="color: #333;">Add Event Details</h2>
-        <form method="post">
-            <div class="mt-3">
-                <label class="form-label">Event Name</label>
-                <input type="text" class="form-control" asp-for="EventName" required maxlength="100"></input>
-                <span asp-validation-for="EventName" class="text-danger"></span>
+<div class="event-form-container">
+    <div class="row">
+        <div class="col-lg-7">
+            <h2 class="event-title">Create New Event</h2>
+            <form method="post">
+                <div class="form-group">
+                    <label class="form-label">Event Name</label>
+                    <input type="text" class="form-control" asp-for="EventName" required maxlength="100" placeholder="Enter a name for your event">
+                    <span asp-validation-for="EventName" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="VenueID">Select Venue</label>
+                    <select class="form-control" id="VenueID" asp-for="VenueID" asp-items="Model.Venues">
+                        <option value="" disabled>Select a venue for your event</option>
+                        <option value="">No Venue Required</option>
+                    </select>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">Start Date</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white">
+                                    <i class="bi bi-calendar-date"></i>
+                                </span>
+                                <input type="date" class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")" asp-for="EventStartDate" required>
+                            </div>
+                            <span asp-validation-for="EventStartDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">End Date</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white">
+                                    <i class="bi bi-calendar-date"></i>
+                                </span>
+                                <input type="date" class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")" asp-for="EventEndDate" required>
+                            </div>
+                            <span asp-validation-for="EventEndDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Event Description</label>
+                    <textarea class="form-control" asp-for="Description" required maxlength="200" rows="4" placeholder="Describe your event"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn-event-submit">
+                        <i class="bi bi-save me-2"></i>Create Event
+                    </button>
+                    <a href="/Events/List" class="btn btn-outline-secondary ms-3 mt-3">Cancel</a>
+                </div>
+            </form>
+        </div>
+        
+        <div class="col-lg-5">
+            <div class="event-image-container">
+                <img src="https://source.unsplash.com/random/600x800/?event" alt="Event" class="event-image">
+                <div class="event-image-overlay">
+                    <h3 class="event-image-title">Create Memorable Events</h3>
+                    <p class="event-image-subtitle">Plan, organize and manage your events seamlessly</p>
+                </div>
             </div>
-            <div class="mt-3">
-                <label class="form-label" for="VenueID">Venue</label>
-                <select class="form-control" id="VenueID" asp-for="VenueID" asp-items="Model.Venues">
-                    <option value="" disabled selected>Select a venue</option>
-                    <option value="" selected>No Venue in mind </option>
-                </select>
-            </div>
-            <div class="mt-3">
-                <label class="form-label">Start Date</label>
-                <input type="date" class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")" asp-for="EventStartDate" required></input>
-                <span asp-validation-for="EventStartDate" class="text-danger"></span>
-            </div>
-            <div class="mt-3">
-                <label class="form-label">End Date</label>
-                <input type="Date" class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")" asp-for="EventEndDate" required></input>
-                <span asp-validation-for="EventEndDate" class="text-danger"></span>
-            </div>
-            <div class="mt-3">
-                <label class="form-label">Description</label>
-                <input type="text" class="form-control" asp-for="Description" required maxlength="200"></input>
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="mt-3">
-                <button type="submit" class="btn btn-primary">save</button>
-            </div>
-        </form>
-    </div>
-    <!-- Right Side: Full Image with Overlay Text -->
-    <div style="flex: 1; position: relative; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-        <div style="width: 100%; height: 100%; background-image: url('https://picsum.photos/600/400'); background-size: cover; background-position: center; position: absolute; top: 0; left: 0;"></div>
+        </div>
     </div>
 </div>
+
+<script>
+    // Date validation script
+    document.addEventListener('DOMContentLoaded', function() {
+        const startDateInput = document.querySelector('input[name="EventStartDate"]');
+        const endDateInput = document.querySelector('input[name="EventEndDate"]');
+        
+        function validateDates() {
+            const startDate = new Date(startDateInput.value);
+            const endDate = new Date(endDateInput.value);
+            
+            if(endDate < startDate) {
+                endDateInput.setCustomValidity('End date must be after start date');
+            } else {
+                endDateInput.setCustomValidity('');
+            }
+        }
+        
+        startDateInput.addEventListener('change', validateDates);
+        endDateInput.addEventListener('change', validateDates);
+    });
+</script>

@@ -1,33 +1,61 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Event_Ease.Models.Entities.Booking
 
-@model Event_Ease.Models.Entities.Booking
-
-<h1>Edit a booking</h1>
-
-@if(Model is null)
-{
-    <p>
-        No Booking was found with this ID 
-    </p>
-}
-else{
-
-    <form method="post">
-        <input type="hidden" asp-for="BookingID" />
-        <div class="form-group">
-            <label for="EventID">Select Event:</label>
-            <select asp-for="EventID" asp-items="ViewBag.Events" class="form-control">
-                <option value="">-- Select an Event --</option>
-            </select>
+<div class="container">
+    @if(Model is null) {
+        <div class="booking-not-found">
+            <h3><i class="bi bi-exclamation-triangle me-2"></i>Booking Not Found</h3>
+            <p>No booking was found with this ID. Please check the ID and try again.</p>
+            <a href="/Bookings" class="btn btn-primary mt-3">Return to Bookings List</a>
         </div>
-        <div class="form-group">
-            <label for="BookingDate">Booking Date:</label>
-            <input asp-for="BookingDate" type="date" class="form-control" />
+    } else {
+        <div class="edit-booking-container">
+            <div class="edit-booking-header">
+                <h2><i class="bi bi-pencil-square me-2"></i>Edit Booking</h2>
+            </div>
+            
+            <div class="edit-booking-body">
+                <div class="text-center mb-4">
+                    <i class="bi bi-calendar-check booking-form-icon" style="color: #6a3093;"></i>
+                    <h3>Update Booking Details</h3>
+                    <p class="text-muted">Booking ID: #@Model.BookingID</p>
+                </div>
+                
+                <form method="post">
+                    <input type="hidden" asp-for="BookingID" />
+                    
+                    <div class="mb-4">
+                        <label for="EventID" class="booking-form-label">
+                            <i class="bi bi-calendar-event me-2"></i>Select Event:
+                        </label>
+                        <select asp-for="EventID" asp-items="ViewBag.Events" class="form-select form-select-booking">
+                            <option value="">-- Select an Event --</option>
+                        </select>
+                        <span asp-validation-for="EventID" class="text-danger mt-2 d-block"></span>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="BookingDate" class="booking-form-label">
+                            <i class="bi bi-calendar-date me-2"></i>Booking Date:
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white">
+                                <i class="bi bi-calendar3"></i>
+                            </span>
+                            <input asp-for="BookingDate" type="date" class="form-control booking-date-input" />
+                        </div>
+                        <span asp-validation-for="BookingDate" class="text-danger mt-2 d-block"></span>
+                    </div>
+                    
+                    <div class="edit-booking-footer">
+                        <button type="submit" class="btn-edit-booking">
+                            <i class="bi bi-check-circle me-2"></i>Update Booking
+                        </button>
+                        <a href="/Bookings/List" class="btn btn-outline-secondary ms-3">
+                            <i class="bi bi-x-circle me-2"></i>Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Confirm Booking</button>
-    </form>
-}
+    }
+</div>

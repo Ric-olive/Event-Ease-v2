@@ -8,11 +8,11 @@ namespace Event_Ease.Controllers
 {
     public class VenuesController : Controller
     {
-        private readonly ApplicationDbContext dbContext;
+        private readonly ApplicationDbContext _dbContext;
         public VenuesController(ApplicationDbContext dbContext)
         {
           
-            this.dbContext = dbContext;
+            this._dbContext = dbContext;
         }
 
         [HttpGet]
@@ -40,8 +40,8 @@ namespace Event_Ease.Controllers
                 IsActive = viewModel.IsActive,
             };
 
-            await dbContext.Venues.AddAsync(venue);
-            await dbContext.SaveChangesAsync();
+            await _dbContext.Venues.AddAsync(venue);
+            await _dbContext.SaveChangesAsync();
             
             return RedirectToAction("List", "Venues");
         }
@@ -49,7 +49,7 @@ namespace Event_Ease.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-          var venues =  await dbContext.Venues.ToListAsync();
+          var venues =  await _dbContext.Venues.ToListAsync();
            
           return View(venues);
         }
@@ -57,7 +57,7 @@ namespace Event_Ease.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
-           var venue = await dbContext.Venues.FindAsync(id);
+           var venue = await _dbContext.Venues.FindAsync(id);
 
             return View(venue);
         }
@@ -65,7 +65,7 @@ namespace Event_Ease.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Venue viewModel)
         {
-           var venue= await dbContext.Venues.FindAsync(viewModel.VenueID);
+           var venue= await _dbContext.Venues.FindAsync(viewModel.VenueID);
 
             if(venue is not null)
             {
@@ -76,7 +76,7 @@ namespace Event_Ease.Controllers
                 venue.IsActive = viewModel.IsActive;
                 venue.Capacity = viewModel.Capacity;
 
-                await dbContext.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
 
             return RedirectToAction("List","Venues");
@@ -85,7 +85,7 @@ namespace Event_Ease.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var venue = await dbContext.Venues
+            var venue = await _dbContext.Venues
         .Include(v => v.Bookings) // Ensure Bookings are included in the query
         .FirstOrDefaultAsync(v => v.VenueID == id);
 
@@ -104,8 +104,8 @@ namespace Event_Ease.Controllers
             }
 
             // Proceed with deletion
-            dbContext.Venues.Remove(venue);
-            await dbContext.SaveChangesAsync();
+            _dbContext.Venues.Remove(venue);
+            await _dbContext.SaveChangesAsync();
 
             TempData["SuccessMessage"] = "Venue successfully deleted.";
             return RedirectToAction("List", "Venues"); // Redirect back to the list view

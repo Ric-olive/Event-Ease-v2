@@ -9,11 +9,11 @@ namespace Event_Ease.Controllers
 {
     public class EventsController : Controller
     {
-        private readonly ApplicationDbContext dbContext;
+        private readonly ApplicationDbContext _dbContext;
 
         public EventsController(ApplicationDbContext dbContext)
         {
-            this.dbContext = dbContext;
+            this._dbContext = dbContext;
         }
 
         [HttpGet]
@@ -21,7 +21,7 @@ namespace Event_Ease.Controllers
         {
             var viewModel = new AddEventViewModel
             {
-                Venues = dbContext.Venues
+                Venues = _dbContext.Venues
                 .Select(v => new SelectListItem
                 {
                     Value = v.VenueID.ToString(),
@@ -47,8 +47,8 @@ namespace Event_Ease.Controllers
                 VenueID = viewModel.VenueID,
             };
 
-            await dbContext.Events.AddAsync(Userevent);
-            await dbContext.SaveChangesAsync();
+            await _dbContext.Events.AddAsync(Userevent);
+            await _dbContext.SaveChangesAsync();
 
             return RedirectToAction("List", "Events");
 
@@ -57,16 +57,16 @@ namespace Event_Ease.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var UserEvents = await dbContext.Events.Include(e=>e.Venue).ToListAsync();
+            var UserEvents = await _dbContext.Events.Include(e=>e.Venue).ToListAsync();
             return View(UserEvents);
         }
 
         [HttpGet]
         public async Task<IActionResult>Edit(Guid id)
         {
-            var UserEvent = await dbContext.Events.FindAsync(id);
+            var UserEvent = await _dbContext.Events.FindAsync(id);
             // Pass the list of venues to the ViewBag
-            ViewBag.Venues = dbContext.Venues.Select(v => new SelectListItem
+            ViewBag.Venues = _dbContext.Venues.Select(v => new SelectListItem
             {
                 Value = v.VenueID.ToString(),
                 Text = v.VenueName
@@ -76,7 +76,7 @@ namespace Event_Ease.Controllers
 
         public async Task<IActionResult> Edit(Event viewModel)
         {
-            var UserEvent = await dbContext.Events.FindAsync(viewModel.EventID);
+            var UserEvent = await _dbContext.Events.FindAsync(viewModel.EventID);
             if (UserEvent is not null)
             {
                 UserEvent.EventName = viewModel.EventName;
@@ -86,7 +86,7 @@ namespace Event_Ease.Controllers
                 UserEvent.VenueID = viewModel.VenueID; // Update the venue
 
                 // Save changes to the database
-                await dbContext.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
 
             }
             return RedirectToAction("List", "Events");
@@ -96,7 +96,7 @@ namespace Event_Ease.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             // Find the event and include related bookings
-            var eventItem = await dbContext.Events
+            var eventItem = await _dbContext.Events
                 .Include(e => e.Bookings) // Include bookings for validation
                 .FirstOrDefaultAsync(e => e.EventID == id);
 
@@ -115,8 +115,8 @@ namespace Event_Ease.Controllers
             }
 
             // Proceed with deletion if no bookings are linked
-            dbContext.Events.Remove(eventItem);
-            await dbContext.SaveChangesAsync();
+            _dbContext.Events.Remove(eventItem);
+            await _dbContext.SaveChangesAsync();
 
             TempData["SuccessMessage"] = "Event successfully deleted.";
             return RedirectToAction("List", "Events");

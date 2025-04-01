@@ -12,55 +12,76 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation-unobtrusive@3.2.12/dist/jquery.validate.unobtrusive.min.js"></script>
 </head>
 
-<div style="display: flex; font-family: Arial, sans-serif; margin: 20px; gap: 20px; background: #f9f9f9; border-radius: 10px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-    <div style="flex: 2; padding-left: 50px;">
+<div class="venue-form-container">
+    <div class="row">
+        <div class="col-lg-7">
+            <h2 class="venue-title">Add New Venue</h2>
+            <form method="post">
+                <div class="form-group">
+                    <label class="form-label">Venue Name</label>
+                    <input type="text" class="form-control" asp-for="VenueName" required maxlength="100" placeholder="Enter venue name">
+                    <span asp-validation-for="VenueName" class="text-danger"></span>
+                </div>
 
-        <h2 style="color: #333;">Add Venue Details</h2>
-        <form method="post">
-            <div class="mt-3">
-                <label class="form-label">Venue Name</label>
-                <input type="text" class="form-control" asp-for="VenueName" required maxlength="100" input />
-                <span asp-validation-for="VenueName" class="text-danger"></span>
-            </div>
-            <div class="mt-3">
-                <label class="form-label">Venue Location</label>
-                <input type="text" class="form-control" asp-for="Location" required maxlength="100" input />
-                <span asp-validation-for="Location" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label class="form-label">Venue Location</label>
+                    <input type="text" class="form-control" asp-for="Location" required maxlength="100" placeholder="Enter venue location">
+                    <span asp-validation-for="Location" class="text-danger"></span>
+                </div>
 
-            <div class="mt-3">
-                <label class="form-label">Venue Capacity</label>
-                <input type="number" class="form-control" asp-for="Capacity" required min="1" max="10000" input />
-                <span asp-validation-for="Capacity" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label class="form-label">Venue Capacity</label>
+                    <input type="number" class="form-control" asp-for="Capacity" required min="1" max="10000" placeholder="Enter maximum capacity">
+                    <span asp-validation-for="Capacity" class="text-danger"></span>
+                </div>
 
-            <div class="mt-3">
-                <label class="form-label">Venue Image</label>
-                <input type="url" class="form-control" asp-for="ImageUrl" required input />
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label class="form-label">Venue Image URL</label>
+                    <input type="url" class="form-control" id="imageUrl" asp-for="ImageUrl" required placeholder="Enter image URL"
+                           onchange="document.getElementById('imagePreview').src = this.value">
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div>
 
-            <div class="mt-3">
-                <label class="form-label">Venue Description</label>
-                <input type="text" class="form-control" asp-for="Description" required maxlength="500" input />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label class="form-label">Venue Description</label>
+                    <textarea class="form-control" asp-for="Description" required maxlength="500" rows="4" placeholder="Enter venue description"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
 
-            <div class="mt-3">
-                <input type="checkbox" id="Active" class="form-check-input" asp-for="IsActive" input />
-                <label class="form-check-label" for="Active">Is Active</label>
-            </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="checkbox" id="Active" class="form-check-input" asp-for="IsActive">
+                        <label class="form-check-label" for="Active">Active Venue</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn-submit">
+                        Create Venue
+                    </button>
+                    <a href="/Venues/List" class="btn btn-outline-secondary ms-3 mt-3">Cancel</a>
+                </div>
+            </form>
+        </div>
 
-            <div class="mt-3">
-                <button type="submit" class="btn btn-primary">save</button>
+        <div class="col-lg-5">
+            <div class="image-preview-container h-100 d-flex flex-column justify-content-center">
+                <span class="image-preview-title">Venue Preview</span>
+                <img id="imagePreview" src="https://picsum.photos/600/400" alt="Venue Preview" class="image-preview">
             </div>
-            
-        </form>
-    </div>
-    <!-- Image Section -->
-    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-        <span style="font-size: 18px; font-weight: bold; color: #555; margin-bottom: 10px;">Venue Image</span>
-        <img id="imagePreview" src="https://picsum.photos/300/400" alt="Venue Image Preview" style="max-width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        </div>
     </div>
 </div>
+
+<script>
+    // Initialize the image preview with the initial value
+    document.addEventListener('DOMContentLoaded', function() {
+        const imageUrlInput = document.getElementById('imageUrl');
+        const imagePreview = document.getElementById('imagePreview');
+
+        if (imageUrlInput.value) {
+            imagePreview.src = imageUrlInput.value;
+        }
+    });
+</script>
 
