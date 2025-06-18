@@ -33,110 +33,132 @@
 
     <!-- Enhanced Filter Section -->
     <div class="container mb-4">
-        <div class="filter-container">
-            <form id="searchForm" method="get" action="@Url.Action("List", "Bookings")">
-                <div class="row">
-                    <div class="col-md-6 col-lg-3 mb-3">
-                        <div class="input-group">
-                            <span class="input-group-text bg-white">
-                                <i class="bi bi-search"></i>
-                            </span>
-                            <input type="text" id="searchTerm" name="searchTerm" class="form-control"
-                                   placeholder="Search by event name or booking ID" value="@ViewBag.SearchTerm">
+        <div class="filter-container card shadow-sm">
+            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="bi bi-funnel me-2"></i>Filter Bookings</h5>
+                <button type="button" class="btn btn-sm btn-link" data-bs-toggle="collapse" data-bs-target="#filterCollapse" aria-expanded="true" aria-controls="filterCollapse">
+                    <i class="bi bi-chevron-down"></i>
+                </button>
+            </div>
+            <div class="collapse show" id="filterCollapse">
+                <div class="card-body">
+                    <form id="searchForm" method="get" action="@Url.Action("List", "Bookings")">
+                        <div class="row g-3">
+                            <!-- Search Term -->
+                            <div class="col-lg-4 col-md-6">
+                                <label for="searchTerm" class="form-label small text-muted">Search</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white border-end-0">
+                                        <i class="bi bi-search"></i>
+                                    </span>
+                                    <input type="text" id="searchTerm" name="searchTerm" class="form-control border-start-0"
+                                           placeholder="Event name or booking ID" value="@ViewBag.SearchTerm">
+                                </div>
+                            </div>
+                            
+                            <!-- Venue Filter -->
+                            <div class="col-lg-4 col-md-6">
+                                <label for="venueFilter" class="form-label small text-muted">Venue</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white border-end-0">
+                                        <i class="bi bi-geo-alt"></i>
+                                    </span>
+                                    <select id="venueFilter" name="venueFilter" class="form-select border-start-0">
+                                        <option value="all" selected="@(ViewBag.VenueFilter == null || ViewBag.VenueFilter == "all")">All Venues</option>
+                                        @foreach (var venue in ViewBag.Venues)
+                                        {
+                                            <option value="@venue" selected="@(ViewBag.VenueFilter == venue)">@venue</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Event Type Filter -->
+                            <div class="col-lg-4 col-md-6">
+                                <label for="eventTypeFilter" class="form-label small text-muted">Event Type</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white border-end-0">
+                                        <i class="bi bi-tag"></i>
+                                    </span>
+                                    <select id="eventTypeFilter" name="eventTypeFilter" class="form-select border-start-0">
+                                        <option value="all" selected="@(ViewBag.EventTypeFilter == null || ViewBag.EventTypeFilter == "all")">All Event Types</option>
+                                        @foreach (var eventType in ViewBag.EventTypes)
+                                        {
+                                            <option value="@eventType" selected="@(ViewBag.EventTypeFilter == eventType)">@eventType</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Status Filter -->
+                            <div class="col-lg-4 col-md-6">
+                                <label for="statusFilter" class="form-label small text-muted">Status</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white border-end-0">
+                                        <i class="bi bi-calendar-check"></i>
+                                    </span>
+                                    <select id="statusFilter" name="statusFilter" class="form-select border-start-0">
+                                        <option value="all" selected="@(ViewBag.StatusFilter == null || ViewBag.StatusFilter == "all")">All Statuses</option>
+                                        <option value="upcoming" selected="@(ViewBag.StatusFilter == "upcoming")">Upcoming</option>
+                                        <option value="in progress" selected="@(ViewBag.StatusFilter == "in progress")">In Progress</option>
+                                        <option value="completed" selected="@(ViewBag.StatusFilter == "completed")">Completed</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Start Date Filter -->
+                            <div class="col-lg-4 col-md-6">
+                                <label for="startDate" class="form-label small text-muted">Start Date</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white border-end-0">
+                                        <i class="bi bi-calendar-event"></i>
+                                    </span>
+                                    <input type="date" id="startDate" name="startDate" class="form-control border-start-0"
+                                           placeholder="Start Date" value="@(ViewBag.StartDate?.ToString("yyyy-MM-dd"))">
+                                </div>
+                            </div>
+                            
+                            <!-- End Date Filter -->
+                            <div class="col-lg-4 col-md-6">
+                                <label for="endDate" class="form-label small text-muted">End Date</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white border-end-0">
+                                        <i class="bi bi-calendar-event"></i>
+                                    </span>
+                                    <input type="date" id="endDate" name="endDate" class="form-control border-start-0"
+                                           placeholder="End Date" value="@(ViewBag.EndDate?.ToString("yyyy-MM-dd"))">
+                                </div>
+                            </div>
+                            
+                            <!-- Venue Availability Filter -->
+                            <div class="col-lg-4 col-md-6">
+                                <label for="venueAvailabilityFilter" class="form-label small text-muted">Venue Availability</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white border-end-0">
+                                        <i class="bi bi-check-circle"></i>
+                                    </span>
+                                    <select id="venueAvailabilityFilter" name="venueAvailabilityFilter" class="form-select border-start-0">
+                                        <option value="" selected="@(ViewBag.VenueAvailabilityFilter == null)">Any Availability</option>
+                                        <option value="true" selected="@(ViewBag.VenueAvailabilityFilter == true)">Available Venues Only</option>
+                                        <option value="false" selected="@(ViewBag.VenueAvailabilityFilter == false)">Unavailable Venues Only</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Apply Filters Button -->
+                            <div class="col-lg-4 col-md-6">
+                                <label class="form-label small text-muted">&nbsp;</label>
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="bi bi-filter me-2"></i>Apply Filters
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="col-md-6 col-lg-3 mb-3">
-                        <div class="input-group">
-                            <span class="input-group-text bg-white">
-                                <i class="bi bi-geo-alt"></i>
-                            </span>
-                            <select id="venueFilter" name="venueFilter" class="form-control">
-                                <option value="all" selected="@(ViewBag.VenueFilter == null || ViewBag.VenueFilter == "all")">All Venues</option>
-                                @foreach (var venue in ViewBag.Venues)
-                                {
-                                    <option value="@venue" selected="@(ViewBag.VenueFilter == venue)">@venue</option>
-                                }
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6 col-lg-3 mb-3">
-                        <div class="input-group">
-                            <span class="input-group-text bg-white">
-                                <i class="bi bi-tag"></i>
-                            </span>
-                            <select id="eventTypeFilter" name="eventTypeFilter" class="form-control">
-                                <option value="all" selected="@(ViewBag.EventTypeFilter == null || ViewBag.EventTypeFilter == "all")">All Event Types</option>
-                                @if (ViewBag.EventTypes != null)
-                                {
-                                    @foreach (var eventType in ViewBag.EventTypes)
-                                    {
-                                        <option value="@eventType" selected="@(ViewBag.EventTypeFilter == eventType)">@eventType</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6 col-lg-3 mb-3">
-                        <div class="input-group">
-                            <span class="input-group-text bg-white">
-                                <i class="bi bi-calendar-check"></i>
-                            </span>
-                            <select id="statusFilter" name="statusFilter" class="form-control">
-                                <option value="all" selected="@(ViewBag.StatusFilter == null || ViewBag.StatusFilter == "all")">All Statuses</option>
-                                <option value="upcoming" selected="@(ViewBag.StatusFilter == "upcoming")">Upcoming</option>
-                                <option value="in progress" selected="@(ViewBag.StatusFilter == "in progress")">In Progress</option>
-                                <option value="completed" selected="@(ViewBag.StatusFilter == "completed")">Completed</option>
-                            </select>
-                        </div>
-                    </div>
+                    </form>
                 </div>
-                
-                <div class="row mb-3">
-                    <div class="col-md-6 col-lg-4 mb-3">
-                        <div class="input-group">
-                            <span class="input-group-text bg-white">
-                                <i class="bi bi-calendar-event"></i>
-                            </span>
-                            <input type="date" id="startDate" name="startDate" class="form-control"
-                                   placeholder="Start Date" value="@(ViewBag.StartDate?.ToString("yyyy-MM-dd"))">
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6 col-lg-4 mb-3">
-                        <div class="input-group">
-                            <span class="input-group-text bg-white">
-                                <i class="bi bi-calendar-event"></i>
-                            </span>
-                            <input type="date" id="endDate" name="endDate" class="form-control"
-                                   placeholder="End Date" value="@(ViewBag.EndDate?.ToString("yyyy-MM-dd"))">
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6 col-lg-4 mb-3">
-                        <div class="input-group">
-                            <span class="input-group-text bg-white">
-                                <i class="bi bi-check-circle"></i>
-                            </span>
-                            <select id="venueAvailabilityFilter" name="venueAvailabilityFilter" class="form-control">
-                                <option value="" selected="@(ViewBag.VenueAvailabilityFilter == null)">Any Availability</option>
-                                <option value="true" selected="@(ViewBag.VenueAvailabilityFilter == true)">Available Venues Only</option>
-                                <option value="false" selected="@(ViewBag.VenueAvailabilityFilter == false)">Unavailable Venues Only</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="d-flex justify-content-center mt-2 mb-4">
-                    <button type="submit" class="btn btn-primary px-4">
-                        <i class="bi bi-filter me-2"></i>Apply Filters
-                    </button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
+
 
     <!-- Bookings Cards Section -->
     <div class="container">
@@ -147,27 +169,34 @@
                 {
                     <div class="col-lg-6 mb-4">
                         <div class="card booking-card h-100">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="booking-id">#@booking.BookingID.ToString().Substring(0, 8)</span>
-                                    <div class="booking-date-badge ms-2">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div class="booking-id-container">
+                                        <span class="booking-id">#@booking.BookingID.ToString().Substring(0, 8)</span>
+                                    </div>
+                                    <div>
+                                        @if (booking.IsUpcoming)
+                                        {
+                                            <span class="status-badge status-upcoming">
+                                                <i class="bi bi-clock me-1"></i>
+                                                @booking.TimeRemainingDisplay
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-wrap align-items-center">
+                                    <div class="booking-date-badge me-2 mb-1">
+                                        <i class="bi bi-calendar3 me-1"></i>
                                         <span>@booking.BookingDate.ToString("MMM dd, yyyy")</span>
                                     </div>
                                     @if (booking.EventTypeID.HasValue)
                                     {
-                                        <div class="event-type-badge ms-2">
+                                        <div class="event-type-badge mb-1">
+                                            <i class="bi bi-tag-fill me-1"></i>
                                             <span>@booking.EventTypeName</span>
                                         </div>
                                     }
                                 </div>
-                                <div>
-                                    @if (booking.IsUpcoming)
-                                    {
-                                        <span class="status-badge status-upcoming">
-                                            <i class="bi bi-clock me-1"></i>
-                                            @booking.TimeRemainingDisplay
-                                        </span>
-                                    }
                                     else if (booking.IsEventActive)
                                     {
                                         <span class="status-badge status-active">
@@ -311,6 +340,56 @@
 
 <!-- Add these CSS rules to your site's stylesheet -->
 <style>
+    /* Filter Container Styles */
+    .filter-container {
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        transition: all 0.3s ease;
+    }
+    
+    .filter-container .card-header {
+        padding: 15px 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        background: linear-gradient(to right, #f8f9fa, #e9ecef);
+    }
+    
+    .filter-container .card-body {
+        padding: 20px;
+        background-color: #fcfcfc;
+    }
+    
+    .filter-container .form-label {
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+    
+    .filter-container .input-group-text {
+        color: #6c757d;
+    }
+    
+    .filter-container .form-control:focus,
+    .filter-container .form-select:focus {
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+        border-color: #86b7fe;
+    }
+    
+    .filter-container .btn-primary {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+        padding: 10px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+    
+    .filter-container .btn-primary:hover {
+        background-color: #0b5ed7;
+        border-color: #0a58ca;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
+    }
+    
+    /* Booking Card Styles */
     .booking-card {
         transition: all 0.3s ease;
         border: none;
@@ -330,25 +409,40 @@
         padding: 15px;
     }
     
+    .booking-id-container {
+        display: inline-block;
+    }
+    
     .booking-id {
-        font-weight: 600;
-        background-color: rgba(255, 255, 255, 0.2);
-        padding: 4px 8px;
-        border-radius: 4px;
         font-size: 0.85rem;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.9);
+        background-color: rgba(0, 0, 0, 0.2);
+        padding: 4px 10px;
+        border-radius: 6px;
+        display: inline-block;
     }
     
     .booking-date-badge, .event-type-badge {
-        background-color: #e9ecef;
-        color: #495057;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
         font-size: 0.8rem;
-        padding: 0.25rem 0.5rem;
-        border-radius: 0.25rem;
+        padding: 4px 10px;
+        border-radius: 6px;
+        display: inline-flex;
+        align-items: center;
+        margin-right: 8px;
+    }
+    
+    .booking-date-badge i,
+    .event-type-badge i {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        margin-right: 4px;
     }
     
     .event-type-badge {
-        background-color: #cff4fc;
-        color: #055160;
+        background-color: rgba(0, 123, 255, 0.3);
     }
     
     .status-badge {

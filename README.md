@@ -1,4 +1,4 @@
-﻿# Event Ease Booking Web App
+# Event Ease Booking Web App
 
 ## 📖 Overview
 The **Event Booking Web App** is a modern platform designed to streamline event management. Whether you're hosting a small gathering or a large conference, this app provides users with an intuitive interface to browse, book, and manage events effortlessly.
@@ -6,18 +6,38 @@ The **Event Booking Web App** is a modern platform designed to streamline event 
 ---
 
 ## 🚀 Features
-- **Event Listings**: Display detailed event information, including descriptions, dates.
-- **Venue Listings**: Display detailed venue information, including descriptions, dates, venues.
-- **Event Management**: Tools for organizers to create, edit, and delete events.
-- **Dashboard**: Personalized user dashboards to view booked events and manage bookings.
+- **Event Listings**: Display detailed event information, including descriptions, dates, types, and venues.
+- **Venue Listings & Management**: View, add, edit, and delete venues with image, location, capacity, and status. Image uploads are stored in Azure Blob Storage.
+- **Event Management**: Tools for organizers to create, edit, and delete events, assign venues and event types.
+- **Advanced Booking Filters**: Filter bookings by venue, event type, booking status (upcoming, in progress, completed), date range, and venue availability.
+- **Personalized Dashboard**: Users can view and manage their bookings with advanced filtering and detailed event/venue info.
+- **Event Types**: Events can be categorized (e.g., Conference, Workshop) and filtered accordingly.
+- **Modern UI/UX**: Responsive Bootstrap design, floating action buttons, SweetAlert2 confirmations, and improved card/list layouts.
+- **Database Seeding**: Automatic initialization of the database with sample data on first run.
 
 ---
 
 ## 🛠️ Technologies Used
-- **Frontend**: Bootstrap, HTML and CSS
-- **Backend**: ASP.NET Core MVC for a robust server-side framework.
-- **Database**: SQL Server using Entity Framework Core for data storage and ORM.
-- **Cloud Hosting**: Azure App Services for deployment and scalability.
+
+- **Frontend**:
+  - Bootstrap 5 (responsive UI)
+  - HTML5 & CSS3
+  - JavaScript (dynamic UI, SweetAlert2 for confirmations)
+- **Backend**:
+  - ASP.NET Core MVC (server-side framework)
+  - Entity Framework Core (ORM, migrations, seeding)
+  - LINQ (data querying)
+  - Dependency Injection (service management)
+- **Database**:
+  - SQL Server (relational database)
+  - Entity Framework Core Migrations (schema/version management)
+- **Cloud & Storage**:
+  - Azure App Services (cloud hosting)
+  - Azure Blob Storage (media/image storage for venues)
+- **Tooling**:
+  - .NET 8 SDK
+  - Visual Studio / Visual Studio Code
+  - NuGet package manager
 
 ---
 
@@ -29,7 +49,7 @@ Ensure you have the following installed:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/event-booking-web-app.git
+   git clone https://github.com/Ric-olive/Event-Ease-v2/tree/development 
 
 2. Ensure you have the following Nuget Packages Installed
    - Microsoft.EntityFrameworkCore.SqlServer   v9.0.3
