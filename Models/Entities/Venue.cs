@@ -1,4 +1,6 @@
-﻿namespace Event_Ease.Models.Entities
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Event_Ease.Models.Entities
 {
     public class Venue
     {
@@ -9,6 +11,10 @@
         public string ImageUrl { get; set; }
         public string Description { get; set; }
         public bool IsActive { get; set; }
+        public bool IsAvailable { get; set; } = true;
+        
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
 
 
 

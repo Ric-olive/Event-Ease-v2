@@ -1,4 +1,57 @@
 ﻿@model Event_Ease.Models.ViewModels.AddBookingViewModel
+@await Html.PartialAsync("_ValidationScriptsPartial")
+@section Scripts {
+    <script>
+        // Custom form validation script
+        $(document).ready(function () {
+            // Show validation messages in a custom alert
+            function showValidationAlert(message) {
+                var alertHtml = `
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        ${message}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                `;
+
+                // Insert at the top of the form
+                $(alertHtml).insertBefore('form').hide().fadeIn();
+
+                // Auto-dismiss after 5 seconds
+                setTimeout(function() {
+                    $('.alert').alert('close');
+                }, 5000);
+            }
+
+            // Custom form submission with validation
+            $('form').on('submit', function(e) {
+                if (!this.checkValidity()) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // Show a consolidated message
+                    showValidationAlert("Please correct the validation errors below.");
+
+                    // Highlight all invalid fields
+                    $(this).find(':invalid').each(function() {
+                        $(this).addClass('is-invalid');
+                        // For accessibility, move focus to the first invalid field
+                        if ($(this).is(':first-of-type:invalid')) {
+                            $(this).focus();
+                        }
+                    });
+                }
+
+                $(this).addClass('was-validated');
+            });
+
+            // Remove invalid class on input when user starts typing
+            $('input, select, textarea').on('input change', function() {
+                $(this).removeClass('is-invalid');
+            });
+        });
+    </script>
+}
 
 <head>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>

@@ -1,4 +1,4 @@
-﻿@model Event_Ease.Models.Entities.Event
+@model Event_Ease.Models.Entities.Event
 
 <div class="edit-event-container">
     <div class="row">
@@ -18,16 +18,34 @@
                     </div>
                 </div>
                 
-                <div class="form-group">
-                    <label class="form-label">Venue</label>
-                    <div class="input-group">
-                        <span class="input-group-text bg-white">
-                            <i class="bi bi-building"></i>
-                        </span>
-                        <select class="form-control" asp-for="VenueID" asp-items="ViewBag.Venues">
-                            <option value="" disabled>Select a venue</option>
-                            <option value="">No Venue</option>
-                        </select>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">Venue</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white">
+                                    <i class="bi bi-building"></i>
+                                </span>
+                                <select class="form-control" asp-for="VenueID" asp-items="ViewBag.Venues">
+                                    <option value="" disabled>Select a venue</option>
+                                    <option value="">No Venue</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">Event Type</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white">
+                                    <i class="bi bi-tag"></i>
+                                </span>
+                                <select class="form-control" asp-for="EventTypeID" asp-items="ViewBag.EventTypes">
+                                    <option value="" disabled>Select an event type</option>
+                                    <option value="">No Event Type</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
